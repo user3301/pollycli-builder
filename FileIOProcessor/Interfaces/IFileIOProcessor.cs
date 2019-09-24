@@ -6,8 +6,6 @@ namespace FileIOProcessor.Interfaces
 {
     public interface IFileIOProcessor
     {
-        Task<List<EmployeeDetails>> Read(in string filePath);
-
-
+        Task<List<EmployeeDetails>> ReadAsync(string filePath);
     }
 }

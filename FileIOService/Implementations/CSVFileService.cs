@@ -14,7 +14,7 @@ namespace FileIOProcessor.Implementations
         {
             var employees = new List<EmployeeDetails>();
 
-            if (File.Exists(filePath)) throw new FileNotFoundException();
+            if (!File.Exists(filePath)) throw new FileNotFoundException();
             using (var reader = File.OpenText(filePath))
             {
                 string rawText = await reader.ReadToEndAsync();

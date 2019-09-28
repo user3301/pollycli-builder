@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FileIOProcessor\FileIOService.csproj" />
+    <ProjectReference Include="..\FileIOService\FileIOService.csproj" />
+    <ProjectReference Include="..\TaxCalculationService\TaxCalculationService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,9 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TVlPQi5Db2Rl", "TVlPQi5Db2R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{0869CE7F-06D7-4115-853C-2AEB87787F00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileIOService", "FileIOProcessor\FileIOService.csproj", "{69B11B7F-D881-4856-A98B-AAAC7D132704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileIOService", "FileIOService\FileIOService.csproj", "{69B11B7F-D881-4856-A98B-AAAC7D132704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalculationService", "TaxCalculationService\TaxCalculationService.csproj", "{6145173F-7CFF-4F53-8A9D-8306788E00C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculationService", "TaxCalculationService\TaxCalculationService.csproj", "{6145173F-7CFF-4F53-8A9D-8306788E00C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{304FD50F-F201-4710-80B3-B0FE06A8A9C9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestInput", "TestInput", "{2BFF2BB0-08C3-4A6E-8095-E1036EE601B8}"
+	ProjectSection(SolutionItems) = preProject
+		test.csv = test.csv
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +46,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2BFF2BB0-08C3-4A6E-8095-E1036EE601B8} = {304FD50F-F201-4710-80B3-B0FE06A8A9C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9EC93E5A-5C66-4863-9672-324A95BA8C71}

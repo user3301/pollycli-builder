@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace FileIOProcessor.Interfaces
 {
-    public interface IFileIOProcessor
+    public interface IFileIOService
     {
         Task<List<EmployeeDetails>> ReadAsync(string filePath);
     }

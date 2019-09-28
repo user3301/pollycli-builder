@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FileIOProcessor.Implementations;
+using FileIOProcessor.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TVlPQi5Db2Rl
 {
@@ -6,7 +8,14 @@ namespace TVlPQi5Db2Rl
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //set up DI
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IFileIOService, CSVFileService>()
+                .BuildServiceProvider();
+
+
+
+
         }
     }
 }

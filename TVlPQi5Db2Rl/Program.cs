@@ -1,8 +1,6 @@
 ﻿using FileIOProcessor.Implementations;
 using FileIOProcessor.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 using TaxCalculationService;
 
@@ -19,8 +17,7 @@ namespace TVlPQi5Db2Rl
 
             var CsvFileProcessor = serviceProvider.GetService<IFileIOService>();
 
-            var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var employees = await CsvFileProcessor.ReadAsync(@"..\..\..\test.csv");
+            var employees = await CsvFileProcessor.ReadAsync(@"..\..\..\..\TestData\test_input.csv");
 
             foreach (var employee in employees)
             {

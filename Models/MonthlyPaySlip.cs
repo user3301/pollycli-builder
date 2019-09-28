@@ -11,7 +11,7 @@
 
         public override string ToString()
         {
-            return FullName + "," + GrossIncome + "," + IncomeTax + "," + NetIncome + "," + Super + "," + PayPeriod;
+            return FullName + "," + PayPeriod + "," + GrossIncome + "," + IncomeTax + "," + NetIncome + "," + Super;
         }
     }
 }

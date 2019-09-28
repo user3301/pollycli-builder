@@ -4,7 +4,7 @@ namespace TaxCalculationService
 {
     public class TaxStrategyFactory
     {
-        public static TaxPlan GetInstance(EmployeeDetails employeeDetails)
+        public static TaxPlan GetInstance(in EmployeeDetails employeeDetails)
         {
             switch (employeeDetails.AnnualSalary)
             {

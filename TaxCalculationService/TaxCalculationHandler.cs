@@ -3,7 +3,7 @@ using System;
 
 namespace TaxCalculationService
 {
-    public class TaxCalculationHandler
+    public sealed class TaxCalculationHandler
     {
         readonly TaxPlan _taxPlan;
         readonly EmployeeDetails _employeeDetails;
@@ -34,6 +34,8 @@ namespace TaxCalculationService
                 PayPeriod = _employeeDetails.PayPeriod
             };
         }
+
+
         uint RoundDown(in decimal number) => (uint)checked(Math.Floor(number));
         uint RoundUp(in decimal number) => (uint)checked(Math.Ceiling(number));
     }

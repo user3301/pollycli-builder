@@ -17,11 +17,12 @@ namespace FileIOProcessor.Implementations
             if (!File.Exists(filePath)) throw new FileNotFoundException();
             using (var reader = File.OpenText(filePath))
             {
-                string rawText = await reader.ReadToEndAsync();
+                string rawText = await reader.ReadToEndAsync().ConfigureAwait(false);
                 string[] csvData = rawText.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
                 foreach (var line in csvData)
                 {
-                    employees.Add(Mapper(line));
+                    // process non-empty line in csv
+                    if (!string.IsNullOrWhiteSpace(line)) employees.Add(Mapper(line));
                 }
             }
             return employees;
@@ -29,7 +30,7 @@ namespace FileIOProcessor.Implementations
         }
 
         #region private methods
-        private EmployeeDetails Mapper(string line)
+        EmployeeDetails Mapper(string line)
         {
             try
             {
@@ -45,7 +46,6 @@ namespace FileIOProcessor.Implementations
             }
             catch (Exception e)
             {
-
                 throw new InvalidDataException(e.Message);
             }
         }

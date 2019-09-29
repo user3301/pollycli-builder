@@ -10,7 +10,7 @@ namespace TaxCalculationService
         const int PAY_PERIOD = 12;
         public TaxCalculationHandler(EmployeeDetails employeeDetails)
         {
-            _employeeDetails = employeeDetails;
+            _employeeDetails = employeeDetails ?? throw new ArgumentNullException(nameof(employeeDetails));
             _taxPlan = TaxStrategyFactory.GetInstance(employeeDetails);
         }
 

@@ -1,5 +1,5 @@
-﻿using FileIOProcessor.Implementations;
-using FileIOProcessor.Interfaces;
+﻿using FileIOService.Implementations;
+using FileIOService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading;

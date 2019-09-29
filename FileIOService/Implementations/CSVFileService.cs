@@ -1,4 +1,4 @@
-﻿using FileIOProcessor.Interfaces;
+﻿using FileIOService.Interfaces;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace FileIOProcessor.Implementations
+namespace FileIOService.Implementations
 {
     public class CSVFileService : IFileIOService
     {
@@ -37,11 +37,10 @@ namespace FileIOProcessor.Implementations
                 var entries = line.Split(new[] { ',' }, StringSplitOptions.None);
                 if (string.IsNullOrWhiteSpace(entries[0])) throw new ArgumentException("First name cannot be null or empty.");
                 if (string.IsNullOrWhiteSpace(entries[1])) throw new ArgumentException("Last name cannot be null or empty.");
-                if (uint.Parse(entries[2]) < 0) throw new ArgumentException("Salary cannot be negative.");
                 return new EmployeeDetails
                 {
-                    FirstName = entries[0] ?? throw new ArgumentException("First Name cannot be null."),
-                    LastName = entries[1] ?? throw new ArgumentException("First Name cannot be null."),
+                    FirstName = entries[0],
+                    LastName = entries[1],
                     AnnualSalary = uint.Parse(entries[2]),
                     SuperRate = uint.Parse(Regex.Match((entries[3]), "[0-9]*\\.*[0-9]*").Value),
                     PayPeriod = entries[4]

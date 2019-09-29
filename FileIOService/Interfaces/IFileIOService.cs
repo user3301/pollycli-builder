@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FileIOProcessor.Interfaces
+namespace FileIOService.Interfaces
 {
     public interface IFileIOService
     {

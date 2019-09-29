@@ -62,16 +62,14 @@ namespace TVlPQi5Db2Rl
 
             );
 
-            // Handle Control+C or Control+Break
             Console.CancelKeyPress += (o, e) =>
             {
                 Console.WriteLine("Exit");
 
-                // Allow the manin thread to continue and exit...
                 waitHandle.Set();
             };
 
-            // Wait
+
             waitHandle.WaitOne();
         }
     }

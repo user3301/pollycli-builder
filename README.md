@@ -11,12 +11,6 @@
 |[![Language](https://img.shields.io/badge/language-csharp-green.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/) | [![Platform](https://img.shields.io/badge/.Net%20Core-3.0-brightgreen)](https://dotnet.microsoft.com/download/dotnet-core/3.0) | [![Test](https://img.shields.io/badge/xUnit-2.4-green)](https://xunit.net/) |
 
 
-
-
-
-
-
-
 This project is built with `.Net Core 3.0` and the `C#` version should be 7.2 or greater. It can run on both Linux and Windows OS.
 
 ## QA & Code Review

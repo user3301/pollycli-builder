@@ -9,7 +9,6 @@ namespace Test
 {
     public class FileIOServiceTests
     {
-
         public IFileIOService CSVFileService { get; set; }
         public FileIOServiceTests()
         {
@@ -20,7 +19,7 @@ namespace Test
         }
 
 
-        [Fact(Timeout = 1_000)]
+        [Fact(Timeout = 10_000)]
         public async Task ReadAsync_Invalid_FilePath_Exception()
         {
             System.Console.WriteLine(this.GetType().Assembly.Location);
@@ -28,7 +27,7 @@ namespace Test
             await Assert.ThrowsAsync<FileNotFoundException>(async () => await CSVFileService.ReadAsync(invalidPath).ConfigureAwait(false));
         }
 
-        [Fact(Timeout = 1_000)]
+        [Fact(Timeout = 10_000)]
         public async Task First_Name_Null_Exception()
         {
             var path = @"../../../../TestData/first_name_null.csv";
@@ -36,7 +35,7 @@ namespace Test
             Assert.Equal("First name cannot be null or empty.", exception.Message);
         }
 
-        [Fact(Timeout = 1_000)]
+        [Fact(Timeout = 10_000)]
         public async Task Last_Name_Empty_Exception()
         {
             var path = @"../../../../TestData/last_name_empty.csv";
@@ -44,7 +43,7 @@ namespace Test
             Assert.Equal("Last name cannot be null or empty.", exception.Message);
         }
 
-        [Fact(Timeout = 1_000)]
+        [Fact(Timeout = 10_000)]
         public async Task Salary_Negative_Exception()
         {
             var path = @"../../../../TestData/salary_negative.csv";
@@ -52,7 +51,7 @@ namespace Test
             Assert.Equal("Value was either too large or too small for a UInt32.", exception.Message);
         }
 
-        [Fact(Timeout = 1_000)]
+        [Fact(Timeout = 10_000)]
         public async Task ReadAsync_Success()
         {
             var path = @"../../../../TestData/test_input.csv";

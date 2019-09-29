@@ -26,7 +26,7 @@ namespace Test
             };
         }
 
-        [Theory(Timeout = 1_000)]
+        [Theory(Timeout = 10_000)]
         [MemberData(nameof(GetSuccessData))]
         public void GetMonthlyPaySlip_Success(EmployeeDetails employeeDetails1, EmployeeDetails employeeDetails2)
         {
@@ -53,7 +53,7 @@ namespace Test
             Assert.Equal(1_000U, super2);
         }
 
-        [Theory(Timeout = 1_000)]
+        [Theory(Timeout = 10_000)]
         [MemberData(nameof(GetFailedData))]
         public void GetMonthlyPaySlip_Exception(string firstName, string lastName, decimal annualSalary, decimal super, string payPeriod, Type exception)
         {

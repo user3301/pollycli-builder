@@ -20,7 +20,7 @@ namespace Test
             };
         }
 
-        [Theory(Timeout = 1_000)]
+        [Theory(Timeout = 10_000)]
         [MemberData(nameof(GetSuccessData))]
         public void GetTaxPlan_Success(decimal salary, TaxPlan expectedTaxPlan)
         {
@@ -31,7 +31,7 @@ namespace Test
             Assert.Equal(expectedTaxPlan.UpperBound, actual.UpperBound);
         }
 
-        [Fact(Timeout = 1_000)]
+        [Fact(Timeout = 10_000)]
         public void GetTaxPlan_Fail_With_Negative_Salary()
         {
             var salary = -1000M;

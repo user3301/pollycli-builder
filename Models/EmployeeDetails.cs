@@ -14,5 +14,8 @@
         }
 
         public string PayPeriod { get; set; }
+
+        public override string ToString() => FirstName + "," + LastName + "," + AnnualSalary + "," + superRate + "," + PayPeriod;
+
     }
 }

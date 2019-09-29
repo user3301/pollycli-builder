@@ -14,29 +14,34 @@ namespace TaxCalculationService
             _taxPlan = TaxStrategyFactory.GetInstance(employeeDetails);
         }
 
-        public uint GetGrossIncome() => RoundDown(_employeeDetails.AnnualSalary / PAY_PERIOD);
+        public uint GetGrossIncome() => Round(_employeeDetails.AnnualSalary / PAY_PERIOD);
 
-        public uint GetIncomeTax() => RoundUp((_taxPlan.TaxBase + (_employeeDetails.AnnualSalary - _taxPlan.LowerBound + 1) * _taxPlan.SurCharge)) / PAY_PERIOD;
+        public uint GetIncomeTax() => Round((_taxPlan.TaxBase + (_employeeDetails.AnnualSalary - _taxPlan.LowerBound + 1) * _taxPlan.SurCharge) / PAY_PERIOD);
 
-        public uint GetNetIncome() => GetGrossIncome() - GetIncomeTax();
+        public uint GetNetIncome() => checked(GetGrossIncome() - GetIncomeTax());
 
-        public uint GetSuper() => RoundDown(GetGrossIncome() * _employeeDetails.SuperRate);
+        public uint GetSuper() => Round(GetGrossIncome() * _employeeDetails.SuperRate);
 
         public MonthlyPaySlip GenerateMonthlyPaySlip()
         {
+            var fullName = $"{_employeeDetails.FirstName} {_employeeDetails.LastName}";
+            var gross = GetGrossIncome();
+            var tax = GetIncomeTax();
+            var net = GetNetIncome();
+            var super = GetSuper();
+            var payPeriod = _employeeDetails.PayPeriod;
             return new MonthlyPaySlip
             {
-                FullName = _employeeDetails.FirstName + " " + _employeeDetails.LastName,
-                GrossIncome = GetGrossIncome(),
-                IncomeTax = GetIncomeTax(),
-                NetIncome = GetNetIncome(),
-                Super = GetSuper(),
-                PayPeriod = _employeeDetails.PayPeriod
+                FullName = fullName,
+                GrossIncome = gross,
+                IncomeTax = tax,
+                NetIncome = net,
+                Super = super,
+                PayPeriod = payPeriod
             };
         }
 
 
-        uint RoundDown(in decimal number) => (uint)checked(Math.Floor(number));
-        uint RoundUp(in decimal number) => (uint)checked(Math.Ceiling(number));
+        uint Round(in decimal number) => (uint)checked(Math.Round(number, MidpointRounding.AwayFromZero));
     }
 }

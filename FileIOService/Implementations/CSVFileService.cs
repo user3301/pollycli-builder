@@ -35,10 +35,13 @@ namespace FileIOProcessor.Implementations
             try
             {
                 var entries = line.Split(new[] { ',' }, StringSplitOptions.None);
+                if (string.IsNullOrWhiteSpace(entries[0])) throw new ArgumentException("First name cannot be null or empty.");
+                if (string.IsNullOrWhiteSpace(entries[1])) throw new ArgumentException("Last name cannot be null or empty.");
+                if (uint.Parse(entries[2]) < 0) throw new ArgumentException("Salary cannot be negative.");
                 return new EmployeeDetails
                 {
-                    FirstName = entries[0],
-                    LastName = entries[1],
+                    FirstName = entries[0] ?? throw new ArgumentException("First Name cannot be null."),
+                    LastName = entries[1] ?? throw new ArgumentException("First Name cannot be null."),
                     AnnualSalary = uint.Parse(entries[2]),
                     SuperRate = uint.Parse(Regex.Match((entries[3]), "[0-9]*\\.*[0-9]*").Value),
                     PayPeriod = entries[4]
@@ -49,7 +52,6 @@ namespace FileIOProcessor.Implementations
                 throw new InvalidDataException(e.Message);
             }
         }
-
         #endregion
     }
 }

@@ -23,6 +23,7 @@ namespace Test
         [Fact(Timeout = 1_000)]
         public async Task ReadAsync_Invalid_FilePath_Exception()
         {
+            System.Console.WriteLine(this.GetType().Assembly.Location);
             var invalidPath = @"..\..\..\..\TestData\invalid.csv";
             await Assert.ThrowsAsync<FileNotFoundException>(async () => await CSVFileService.ReadAsync(invalidPath).ConfigureAwait(false));
         }

@@ -1,0 +1,19 @@
+language: csharp
+mono: none
+os: linux
+dist: xenial
+dotnet: 3.0.100
+
+install:
+- dotnet restore
+
+script:
+- dotnet build
+- dotnet test Test/Test.csproj
+
+notification:
+  email:
+    recipients:
+      - stan_gai@Hotmail.com
+    on_success: never
+    on_failure: always

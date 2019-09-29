@@ -24,14 +24,14 @@ namespace Test
         public async Task ReadAsync_Invalid_FilePath_Exception()
         {
             System.Console.WriteLine(this.GetType().Assembly.Location);
-            var invalidPath = @"../../../../TestData\invalid.csv";
+            var invalidPath = @"../../../../TestData/invalid.csv";
             await Assert.ThrowsAsync<FileNotFoundException>(async () => await CSVFileService.ReadAsync(invalidPath).ConfigureAwait(false));
         }
 
         [Fact(Timeout = 1_000)]
         public async Task First_Name_Null_Exception()
         {
-            var path = @"../../../../TestData\first_name_null.csv";
+            var path = @"../../../../TestData/first_name_null.csv";
             var exception = await Assert.ThrowsAsync<InvalidDataException>(async () => await CSVFileService.ReadAsync(path).ConfigureAwait(false));
             Assert.Equal("First name cannot be null or empty.", exception.Message);
         }
@@ -39,7 +39,7 @@ namespace Test
         [Fact(Timeout = 1_000)]
         public async Task Last_Name_Empty_Exception()
         {
-            var path = @"../../../../TestData\last_name_empty.csv";
+            var path = @"../../../../TestData/last_name_empty.csv";
             var exception = await Assert.ThrowsAsync<InvalidDataException>(async () => await CSVFileService.ReadAsync(path).ConfigureAwait(false));
             Assert.Equal("Last name cannot be null or empty.", exception.Message);
         }
@@ -47,7 +47,7 @@ namespace Test
         [Fact(Timeout = 1_000)]
         public async Task Salary_Negative_Exception()
         {
-            var path = @"../../../../TestData\salary_negative.csv";
+            var path = @"../../../../TestData/salary_negative.csv";
             var exception = await Assert.ThrowsAsync<InvalidDataException>(async () => await CSVFileService.ReadAsync(path).ConfigureAwait(false));
             Assert.Equal("Value was either too large or too small for a UInt32.", exception.Message);
         }
@@ -55,7 +55,7 @@ namespace Test
         [Fact(Timeout = 1_000)]
         public async Task ReadAsync_Success()
         {
-            var path = @"../../../../TestData\test_input.csv";
+            var path = @"../../../../TestData/test_input.csv";
             var employeeDetails = await CSVFileService.ReadAsync(path).ConfigureAwait(false);
             Assert.NotNull(employeeDetails);
             Assert.Equal(2, employeeDetails.Count);

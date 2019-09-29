@@ -4,13 +4,20 @@
 [![Build Status](https://travis-ci.org/user3301/TVlPQi5Db2Rl.svg?branch=travis)](https://travis-ci.org/user3301/TVlPQi5Db2Rl)
 
 ## Environment
-[![Language](https://img.shields.io/badge/language-csharp-green.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+|Language | Framework | Test |
+|---------|---|---|
+|[![Language](https://img.shields.io/badge/language-csharp-green.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/) | [![Platform](https://img.shields.io/badge/.Net%20Core-3.0-brightgreen)](https://dotnet.microsoft.com/download/dotnet-core/3.0) | [![Test](https://img.shields.io/badge/xUnit-2.4-green)](https://xunit.net/) |
 
-[![Platform](https://img.shields.io/badge/.Net%20Core-3.0-brightgreen)](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+
+
+
+
+
+
 
 This project is built with `.Net Core 3.0` and the `C#` version should be 7.2 or greater. It can run on both Linux and Windows OS.
 
-## QA
+## QA & Code Review
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c46dd2ceae9c4f8d86c9eb94f9965e31)](https://www.codacy.com/manual/user3301/TVlPQi5Db2Rl?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=user3301/TVlPQi5Db2Rl&amp;utm_campaign=Badge_Grade)
 
 ## How To Run

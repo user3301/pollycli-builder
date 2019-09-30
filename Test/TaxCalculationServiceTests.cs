@@ -12,8 +12,8 @@ namespace Test
         {
             yield return new object[]
             {
-                new EmployeeDetails { FirstName = "David", LastName = "Rudd", AnnualSalary = 60_050M, SuperRate = 9M, PayPeriod = "01 March - 31 March"},
-                new EmployeeDetails { FirstName = "Ryan", LastName = "Chen", AnnualSalary = 120_000M, SuperRate = 10M, PayPeriod = "01 March - 01 March"}
+                new EmployeeDetails { FirstName = "David", LastName = "Rudd", AnnualSalary = 60_050U, SuperRate = 9M, PayPeriod = "01 March - 31 March"},
+                new EmployeeDetails { FirstName = "Ryan", LastName = "Chen", AnnualSalary = 120_000U, SuperRate = 10M, PayPeriod = "01 March - 01 March"}
             };
         }
 
@@ -55,7 +55,7 @@ namespace Test
 
         [Theory(Timeout = 10_000)]
         [MemberData(nameof(GetFailedData))]
-        public void GetMonthlyPaySlip_Exception(string firstName, string lastName, decimal annualSalary, decimal super, string payPeriod, Type exception)
+        public void GetMonthlyPaySlip_Exception(string firstName, string lastName, uint annualSalary, decimal super, string payPeriod, Type exception)
         {
             var employeeDetails = new EmployeeDetails
             {

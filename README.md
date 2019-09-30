@@ -30,6 +30,6 @@ PS: The project is Docker friendly, you can build docker image and run as docker
 
 ## Assumptions
 1. All numbers are non-negative rational numbers;
-2. `AnnualSalary` of an individual will be within `+-1.0 x 10^28 to +-7.9 x 10^28`;
+2. `AnnualSalary` of an individual will be in range from `0` to `4,294,967,295`;
 3. The size of csv file cannot exceed the RAM capacity of your system;
 4. The output tax result uses the same currency with the input;

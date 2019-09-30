@@ -14,6 +14,7 @@ script:
 branches:
     only:
         - travis
+        - master
 
 notification:
   email:

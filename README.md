@@ -3,7 +3,7 @@
 # TVlPQi5Db2Rl
 
 ## CI/CD Pipeline
-[![Build Status](https://travis-ci.org/user3301/TVlPQi5Db2Rl.svg?branch=travis)](https://travis-ci.org/user3301/TVlPQi5Db2Rl)
+[![Build Status](https://travis-ci.org/user3301/TVlPQi5Db2Rl.svg?branch=master)](https://travis-ci.org/user3301/TVlPQi5Db2Rl)
 
 ## Environment
 |Language | Framework | Test |

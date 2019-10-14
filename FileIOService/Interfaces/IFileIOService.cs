@@ -1,11 +1,9 @@
-﻿using Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace FileIOService.Interfaces
 {
-    public interface IFileIOService
+    public interface IFileIOService<T>
     {
-        Task<List<EmployeeDetails>> ReadAsync(string filePath);
+        Task<T> ReadAsync(string filePath);
     }
 }

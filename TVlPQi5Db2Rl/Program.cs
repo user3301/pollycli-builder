@@ -1,7 +1,9 @@
 ﻿using FileIOService.Implementations;
 using FileIOService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Models;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using TaxCalculationService;
@@ -16,10 +18,10 @@ namespace TVlPQi5Db2Rl
         {
             //set up DI
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IFileIOService, CSVFileService>()
+                .AddSingleton<IFileIOService<List<EmployeeDetails>>, CSVFileService>()
                 .BuildServiceProvider();
 
-            var CsvFileProcessor = serviceProvider.GetService<IFileIOService>();
+            var CsvFileProcessor = serviceProvider.GetService<IFileIOService<List<EmployeeDetails>>>();
             Console.WriteLine("Welcome To Tax Calculator!");
 
             _ = Task.Run(async () =>

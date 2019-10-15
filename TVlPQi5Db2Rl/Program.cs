@@ -18,10 +18,10 @@ namespace TVlPQi5Db2Rl
         {
             //set up DI
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IFileIOService<List<EmployeeDetails>>, CSVFileService>()
+                .AddSingleton<IFileIOService<string, List<EmployeeDetails>>, CSVFileService>()
                 .BuildServiceProvider();
 
-            var CsvFileProcessor = serviceProvider.GetService<IFileIOService<List<EmployeeDetails>>>();
+            var CsvFileProcessor = serviceProvider.GetService<IFileIOService<string, List<EmployeeDetails>>>();
             Console.WriteLine("Welcome To Tax Calculator!");
 
             _ = Task.Run(async () =>

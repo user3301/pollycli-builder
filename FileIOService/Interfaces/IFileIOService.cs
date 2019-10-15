@@ -2,8 +2,8 @@
 
 namespace FileIOService.Interfaces
 {
-    public interface IFileIOService<T>
+    public interface IFileIOService<TIn, TOut>
     {
-        Task<T> ReadAsync(string filePath);
+        Task<TOut> ReadAsync(TIn dataSource);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileIOService.Implementations
 {
-    public class CSVFileService : IFileIOService<List<EmployeeDetails>>
+    public class CSVFileService : IFileIOService<string, List<EmployeeDetails>>
     {
         public async Task<List<EmployeeDetails>> ReadAsync(string filePath)
         {

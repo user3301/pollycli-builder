@@ -11,13 +11,13 @@ namespace Test
 {
     public class FileIOServiceTests
     {
-        public IFileIOService<List<EmployeeDetails>> CSVFileService { get; set; }
+        public IFileIOService<string, List<EmployeeDetails>> CSVFileService { get; set; }
         public FileIOServiceTests()
         {
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IFileIOService<List<EmployeeDetails>>, CSVFileService>()
+                .AddSingleton<IFileIOService<string, List<EmployeeDetails>>, CSVFileService>()
                 .BuildServiceProvider();
-            CSVFileService = serviceProvider.GetService<IFileIOService<List<EmployeeDetails>>>();
+            CSVFileService = serviceProvider.GetService<IFileIOService<string, List<EmployeeDetails>>>();
         }
 
 

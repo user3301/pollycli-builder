@@ -1,6 +1,8 @@
 ﻿using FileIOService.Implementations;
 using FileIOService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
@@ -9,13 +11,13 @@ namespace Test
 {
     public class FileIOServiceTests
     {
-        public IFileIOService CSVFileService { get; set; }
+        public IFileIOService<string, List<EmployeeDetails>> CSVFileService { get; set; }
         public FileIOServiceTests()
         {
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IFileIOService, CSVFileService>()
+                .AddSingleton<IFileIOService<string, List<EmployeeDetails>>, CSVFileService>()
                 .BuildServiceProvider();
-            CSVFileService = serviceProvider.GetService<IFileIOService>();
+            CSVFileService = serviceProvider.GetService<IFileIOService<string, List<EmployeeDetails>>>();
         }
 
 

@@ -1,13 +1,35 @@
-﻿using Models;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using TaxCalculationService;
 using Xunit;
-
 namespace Test
 {
     public class TaxCalculationServiceTests
     {
+        public ITaxBracketHandler<TaxPlan> TaxBracketHandler { get; set; }
+        public ITaxCalculationHandler<EmployeeDetails, MonthlyPaySlip> TaxCalculationHandler { get; set; }
+
+        public TaxCalculationServiceTests()
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.test.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            var serviceProvider = new ServiceCollection()
+                .Configure<AppSettings>(configuration)
+                .AddSingleton<ITaxBracketHandler<TaxPlan>, TaxBracketHandler>()
+                .AddTransient<ITaxCalculationHandler<EmployeeDetails, MonthlyPaySlip>, TaxCalculationHandler>()
+                .BuildServiceProvider();
+
+            TaxBracketHandler = serviceProvider.GetService<ITaxBracketHandler<TaxPlan>>();
+            TaxCalculationHandler = serviceProvider.GetService<ITaxCalculationHandler<EmployeeDetails, MonthlyPaySlip>>();
+
+        }
         public static IEnumerable<object[]> GetSuccessData()
         {
             yield return new object[]
@@ -27,33 +49,6 @@ namespace Test
         }
 
         [Theory(Timeout = 10_000)]
-        [MemberData(nameof(GetSuccessData))]
-        public void GetMonthlyPaySlip_Success(EmployeeDetails employeeDetails1, EmployeeDetails employeeDetails2)
-        {
-            var taxHandler1 = new TaxCalculationHandler(employeeDetails1);
-            var grossIncome1 = taxHandler1.GetGrossIncome();
-            var incomeTax1 = taxHandler1.GetIncomeTax();
-            var netIncome1 = taxHandler1.GetNetIncome();
-            var super1 = taxHandler1.GetSuper();
-
-            Assert.Equal(5_004U, grossIncome1);
-            Assert.Equal(922U, incomeTax1);
-            Assert.Equal(4_082U, netIncome1);
-            Assert.Equal(450U, super1);
-
-            var taxHandler2 = new TaxCalculationHandler(employeeDetails2);
-            var grossIncome2 = taxHandler2.GetGrossIncome();
-            var incomeTax2 = taxHandler2.GetIncomeTax();
-            var netIncome2 = taxHandler2.GetNetIncome();
-            var super2 = taxHandler2.GetSuper();
-
-            Assert.Equal(10_000U, grossIncome2);
-            Assert.Equal(2_669U, incomeTax2);
-            Assert.Equal(7_331U, netIncome2);
-            Assert.Equal(1_000U, super2);
-        }
-
-        [Theory(Timeout = 10_000)]
         [MemberData(nameof(GetFailedData))]
         public void GetMonthlyPaySlip_Exception(string firstName, string lastName, uint annualSalary, decimal super, string payPeriod, Type exception)
         {
@@ -66,9 +61,9 @@ namespace Test
                 PayPeriod = payPeriod
             };
 
-            var taxHandler = new TaxCalculationHandler(employeeDetails);
+            TaxCalculationHandler.SetEmployeeDetails(employeeDetails);
 
-            Assert.Throws(exception, () => taxHandler.GenerateMonthlyPaySlip());
+            Assert.Throws(exception, () => TaxCalculationHandler.GeneratePaySlip());
         }
     }
 }

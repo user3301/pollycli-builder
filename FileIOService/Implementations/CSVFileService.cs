@@ -3,12 +3,11 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FileIOService.Implementations
 {
-    public class CSVFileService : IFileIOService
+    public class CSVFileService : IFileIOService<string, List<EmployeeDetails>>
     {
         public async Task<List<EmployeeDetails>> ReadAsync(string filePath)
         {
@@ -18,7 +17,7 @@ namespace FileIOService.Implementations
             using (var reader = File.OpenText(filePath))
             {
                 string rawText = await reader.ReadToEndAsync().ConfigureAwait(false);
-                string[] csvData = rawText.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                string[] csvData = rawText.Split(Environment.NewLine.ToCharArray());
                 foreach (var line in csvData)
                 {
                     // process non-empty line in csv
@@ -36,13 +35,19 @@ namespace FileIOService.Implementations
                 var entries = line.Split(new[] { ',' }, StringSplitOptions.None);
                 if (string.IsNullOrWhiteSpace(entries[0])) throw new ArgumentException("First name cannot be null or empty.");
                 if (string.IsNullOrWhiteSpace(entries[1])) throw new ArgumentException("Last name cannot be null or empty.");
+
+                var firstName = entries[0];
+                var lastName = entries[1];
+                var annualSalary = uint.Parse(entries[2]);
+                var superRate = uint.Parse(entries[3].Remove(entries[3].Length - 1));
+                var payPeriod = entries[4];
                 return new EmployeeDetails
                 {
-                    FirstName = entries[0],
-                    LastName = entries[1],
-                    AnnualSalary = uint.Parse(entries[2]),
-                    SuperRate = uint.Parse(Regex.Match((entries[3]), "[0-9]*\\.*[0-9]*").Value),
-                    PayPeriod = entries[4]
+                    FirstName = firstName,
+                    LastName = lastName,
+                    AnnualSalary = annualSalary,
+                    SuperRate = superRate,
+                    PayPeriod = payPeriod
                 };
             }
             catch (Exception e)

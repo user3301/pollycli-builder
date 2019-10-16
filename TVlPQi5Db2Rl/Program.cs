@@ -1,9 +1,11 @@
 ﻿using FileIOService.Implementations;
 using FileIOService.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using TaxCalculationService;
@@ -16,13 +18,24 @@ namespace TVlPQi5Db2Rl
 
         static void Main()
         {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
             //set up DI
             var serviceProvider = new ServiceCollection()
+                .Configure<AppSettings>(configuration)
                 .AddSingleton<IFileIOService<string, List<EmployeeDetails>>, CSVFileService>()
+                .AddSingleton<ITaxBracketHandler<TaxPlan>, TaxBracketHandler>()
+                .AddTransient<ITaxCalculationHandler<EmployeeDetails, MonthlyPaySlip>, TaxCalculationHandler>()
                 .BuildServiceProvider();
 
             var CsvFileProcessor = serviceProvider.GetService<IFileIOService<string, List<EmployeeDetails>>>();
+            var taxHandler = serviceProvider.GetService<ITaxBracketHandler<TaxPlan>>();
+            var taxCalculationHandler = serviceProvider.GetService<ITaxCalculationHandler<EmployeeDetails, MonthlyPaySlip>>();
             Console.WriteLine("Welcome To Tax Calculator!");
+
 
             _ = Task.Run(async () =>
                   {
@@ -43,8 +56,8 @@ namespace TVlPQi5Db2Rl
                               Console.WriteLine("Tax calculation outcome:");
                               foreach (var employee in employees)
                               {
-                                  var handler = new TaxCalculationHandler(employee);
-                                  var payslip = handler.GenerateMonthlyPaySlip();
+                                  taxCalculationHandler.SetEmployeeDetails(employee);
+                                  var payslip = taxCalculationHandler.GeneratePaySlip();
                                   Console.WriteLine(payslip.ToString());
                               }
                           }
